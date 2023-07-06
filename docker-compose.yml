@@ -1,0 +1,10 @@
+version: '3'
+services:
+  single-node:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 4040:4040
+    volumes:
+      - ./app:/home/sam/app
