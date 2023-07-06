@@ -15,7 +15,7 @@ To run the docker run the `docker-compose up` command as given below.
 
 In order to launch pyspark you can go to the container and type pyspark as given below
 
-![pyspark_terminal](resources/terminal.png)
+![pyspark_terminal](../resources/terminal.png)
 
 
 Test if spark is setup properly and working file by running below code
@@ -31,16 +31,16 @@ wc_df = textfile_df.withColumn('word', f.explode(f.split(f.col('value'), ' '))).
 wc_df.show()
 ```
 
-![word_count](resources/word_count.png)
+![word_count](../resources/word_count.png)
 
 
-![word_frequency_count](resources/word_frequency_count.png)
+![word_frequency_count](../resources/word_frequency_count.png)
 
 
 In order to launch SparkUI you can go to localhost:4040
 Spark UI screenshot given below
 
-![spark_ui](resources/spark_ui.png)
+![spark_ui](../resources/spark_ui.png)
 
 
 
