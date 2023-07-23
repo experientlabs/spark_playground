@@ -10,4 +10,4 @@ It contains various setups like:
 To know, how to use it, refer the readme file inside each folder. 
 
 
-![spark_in_docker](spark-single-node/resources/spark_in_docker.png)
+![spark_in_docker](spark-single-node/resources/spark_in_docker.jpg)
