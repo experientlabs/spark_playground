@@ -76,11 +76,26 @@ hostfolder="$(pwd)"
 dockerfolder="/home/sam/app"
 docker run --rm -it \
   --net="host" \
-  -v ${hostfolder}:${dockerfolder} \
+  -v ${hostfolder}/app:${dockerfolder} \
 --entrypoint bash spark-in-docker:latest
 ```
 
-Note For Windows:
+To run detached from current terminal window:
+```bash
+docker run -d --rm -it \
+    -p 4040:4040 -v ${hostfolder}/app:${dockerfolder} \ 
+    docker-spark-single-node:latest
+```
+
+Note For Windows-1:
 Note that in case of windows, path starts with C:/ which is different than universal path pattern. 
 So if you are running from windows then make sure to check the path with volume mapping. 
 
+Note for Windows-2
+Note that the host networking driver only works on Linux hosts, and is not supported on Docker Desktop for Mac,
+Docker Desktop for Windows, or Docker EE for Windows Server.
+Note also that Docker for Windows/Mac won't warn you that it doesn't work - it just runs the container silently 
+and DOESN'T bind to any local ports.
+
+I was stuck on this for few hours, trying to access sparkUI. 
+https://stackoverflow.com/questions/43316376/what-does-net-host-option-in-docker-command-really-do
