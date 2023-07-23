@@ -63,14 +63,24 @@ Examples:
 
 
 
-For Windows:
-
+### Start Container using `docker build` command (without using docker-compose):
+ Build the image using docker build command as below
+```bash
+docker build -t my-docker-image .
 ```
-set hostfolder=%cd%
-set dockerfolder=/home/sam/app
 
-echo %hostfolder%
-echo %dockerfolder%
 
+### Then run the image using `docker run` command:
+```bash
+hostfolder="$(pwd)"
+dockerfolder="/home/sam/app"
+docker run --rm -it \
+  --net="host" \
+  -v ${hostfolder}:${dockerfolder} \
+--entrypoint bash spark-in-docker:latest
 ```
+
+Note For Windows:
+Note that in case of windows, path starts with C:/ which is different than universal path pattern. 
+So if you are running from windows then make sure to check the path with volume mapping. 
 
