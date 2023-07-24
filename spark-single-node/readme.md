@@ -106,5 +106,4 @@ Docker Desktop for Windows, or Docker EE for Windows Server.
 Note also that Docker for Windows/Mac won't warn you that it doesn't work - it just runs the container silently 
 and DOESN'T bind to any local ports.
 
-I was stuck on this for few hours, trying to access sparkUI. 
-https://stackoverflow.com/questions/43316376/what-does-net-host-option-in-docker-command-really-do
+
