@@ -87,6 +87,15 @@ docker run -d --rm -it \
     docker-spark-single-node:latest
 ```
 
+
+```
+docker  exec -it 1af493da8cebe92d917abc5efa34086013ebeb9e350cb5bf280c63dabc73330f /bin/sh
+```
+
+```
+jupyter notebook --ip 0.0.0.0 --port 4041 --no-browser --allow-root
+```
+
 Note For Windows-1:
 Note that in case of windows, path starts with C:/ which is different than universal path pattern. 
 So if you are running from windows then make sure to check the path with volume mapping. 
