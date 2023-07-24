@@ -70,6 +70,7 @@ ENV PYSPARK_PYTHON=/usr/bin/python3
 ENV PYSPARK_DRIVER_PYTHON='jupyter'
 ENV PYSPARK_DRIVER_PYTHON_OPTS='notebook --no-browser --port=4041'
 
+
 # Fix Spark installation for Java 11 and Apache Arrow library
 # see: https://github.com/apache/spark/pull/27356, https://spark.apache.org/docs/latest/#downloading
 RUN cp -p "${SPARK_HOME}/conf/spark-defaults.conf.template" "${SPARK_HOME}/conf/spark-defaults.conf" && \
