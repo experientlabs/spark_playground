@@ -1,2 +1,3 @@
 .idea/
 spark-single-node/app/spark_events/
+spark-single-node/app/.ipynb_checkpoints/
