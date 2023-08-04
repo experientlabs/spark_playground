@@ -15,7 +15,7 @@ RUN apt-get update && \
 ## Download spark and hadoop dependencies and install
 
 # Optional env variables
-ENV SPARK_VERSION=3.3.1
+ENV SPARK_VERSION=3.4.1
 ENV HADOOP_VERSION=3
 ENV JAVA_VERSION=11
 ENV SPARK_HOME=${SPARK_HOME:-"/home/spark"}
@@ -25,6 +25,7 @@ RUN mkdir -p ${HADOOP_HOME} && mkdir -p ${SPARK_HOME}
 WORKDIR ${SPARK_HOME}
 
 # Downalod Spark and Install
+# TODO: Always test the url before building image
 RUN DOWNLOAD_URL_SPARK="https://dlcdn.apache.org/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz" \
     && wget --verbose -O spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz  "${DOWNLOAD_URL_SPARK}"\
     && tar -xf spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz -C /home/spark --strip-components=1 \
@@ -56,5 +57,7 @@ RUN chmod u+x /home/spark/sbin/* && \
 ENV PYTHONPATH=$SPARK_HOME/python/:$PYTHONPATH
 
 COPY entrypoint.sh .
+RUN chmod u+x entrypoint.sh
 
-ENTRYPOINT ["./entrypoint.sh"]
+# ENTRYPOINT ["./entrypoint.sh"]
+CMD ["sh", "-c", "tail -f /dev/null"]

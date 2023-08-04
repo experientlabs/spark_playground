@@ -3,6 +3,19 @@
 
 
 
+
+docker build -t spark-base-image .
+
+docker run --rm -it \
+  -p 8080:8080 \
+--entrypoint bash spark-base-image:latest
+
+in order to sanitize entrypoint.sh I ran below command. 
+And this reminds me n*100th times, how much windows sucks. 
+```
+perl -i -pe 'y|\r||d' entrypoint.sh
+```
+
 https://github.com/mrn-aglic/pyspark-playground
 https://medium.com/@MarinAgli1/setting-up-a-spark-standalone-cluster-on-docker-in-layman-terms-8cbdc9fdd14b
 
