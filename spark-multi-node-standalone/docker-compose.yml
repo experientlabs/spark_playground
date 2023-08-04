@@ -36,7 +36,7 @@ services:
       - '18080:18080'
 
   spark-worker:
-#    container_name: da-spark-worker
+#    container_name: el-spark-worker  # Remove the custom name to scale the service
     image: el-spark-image
     entrypoint: ['./entrypoint.sh', 'worker']
     depends_on:
