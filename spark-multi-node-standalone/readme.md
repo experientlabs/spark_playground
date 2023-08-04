@@ -8,3 +8,10 @@ https://medium.com/@MarinAgli1/setting-up-a-spark-standalone-cluster-on-docker-i
 
 
 https://medium.com/@MarinAgli1/setting-up-hadoop-yarn-to-run-spark-applications-6ea1158287af
+
+
+
+
+
+How to install make on windows?
+https://windowsreport.com/make-command-not-found/
