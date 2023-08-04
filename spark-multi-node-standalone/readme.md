@@ -1,7 +1,8 @@
 # Spark Multi Node cluster setup using Docker
 
 
-
+make build
+make run-scaled
 
 
 docker build -t spark-base-image .

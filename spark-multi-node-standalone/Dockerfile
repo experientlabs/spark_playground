@@ -59,5 +59,5 @@ ENV PYTHONPATH=$SPARK_HOME/python/:$PYTHONPATH
 COPY entrypoint.sh .
 RUN chmod u+x entrypoint.sh
 
-# ENTRYPOINT ["./entrypoint.sh"]
-CMD ["sh", "-c", "tail -f /dev/null"]
+ENTRYPOINT ["./entrypoint.sh"]
+# CMD ["sh", "-c", "tail -f /dev/null"]
