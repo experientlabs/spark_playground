@@ -4,7 +4,7 @@ services:
   spark-yarn-master:
     container_name: el-spark-yarn-master
     build:
-      dockerfile: Dockerfile-yarn
+      dockerfile: Dockerfile
       context: .
     image: el-spark-yarn-image
     entrypoint: ['./entrypoint.sh', 'master']
@@ -22,19 +22,19 @@ services:
 
   spark-yarn-worker:
 #    container_name: da-spark-worker
-    image: da-spark-yarn-image
+    image: el-spark-yarn-image
     entrypoint: ['./entrypoint.sh', 'worker']
     depends_on:
       - spark-yarn-master
     env_file:
       - .env.spark
     volumes:
-      - ./book_data:/opt/spark/data
-      - ./spark_apps:/opt/spark/apps
+      - ./book_data:/home/spark/data
+      - ./spark_apps:/home/spark/apps
 
   yarn-history-server:
-    container_name: da-spark-yarn-history
-    image: da-spark-yarn-image
+    container_name: el-spark-yarn-history
+    image: el-spark-yarn-image
     entrypoint: ['./entrypoint.sh', 'history']
     depends_on:
       - spark-yarn-master
