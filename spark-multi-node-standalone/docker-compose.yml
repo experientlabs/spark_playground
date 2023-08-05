@@ -31,7 +31,7 @@ services:
     env_file:
       - .env.spark
     volumes:
-      - spark-logs:/opt/spark/spark-events
+      - spark-logs:/home/spark/spark-events
     ports:
       - '18080:18080'
 
@@ -44,9 +44,9 @@ services:
     env_file:
       - .env.spark
     volumes:
-      - ./book_data:/opt/spark/data
-      - ./spark_apps:/opt/spark/apps
-      - spark-logs:/opt/spark/spark-events
+      - ./book_data:/home/spark/data
+      - ./spark_apps:/home/spark/apps
+      - spark-logs:/home/spark/spark-events
 
 volumes:
   spark-logs:
