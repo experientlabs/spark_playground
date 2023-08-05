@@ -95,7 +95,7 @@ RUN ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa && \
 COPY ssh_config ~/.ssh/config
 
 # Copy appropriate entrypoint script
-COPY entrypoint-yarn.sh entrypoint.sh
+COPY entrypoint.sh entrypoint.sh
 
 EXPOSE 22
 
