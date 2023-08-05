@@ -5,7 +5,7 @@ spark = SparkSession.builder.appName(
     "Ch03 - Analyzing the vocabulary of Pride and Prejudice."
 ).getOrCreate()
 
-book = spark.read.text("/opt/spark/data/pride-and-prejudice.txt")
+book = spark.read.text("/home/spark/data/pride-and-prejudice.txt")
 
 lines = book.select(F.split(F.col("value"), " ").alias("line"))
 
