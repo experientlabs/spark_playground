@@ -1,6 +1,6 @@
 FROM python:3.10-buster as spark-base-image
 
-LABEL maintainer="experient labs"
+LABEL maintainer="experient-labs"
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
