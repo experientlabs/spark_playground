@@ -32,9 +32,9 @@ RUN DOWNLOAD_URL_SPARK="https://dlcdn.apache.org/spark/spark-${SPARK_VERSION}/sp
     && rm spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz
 
 # Download and install Hadoop
-RUN curl https://dlcdn.apache.org/hadoop/common/hadoop-3.3.1/hadoop-3.3.1.tar.gz -o hadoop-3.3.1-bin.tar.gz \
- && tar xfz hadoop-3.3.1-bin.tar.gz --directory /opt/hadoop --strip-components 1 \
- && rm -rf hadoop-3.3.1-bin.gz
+RUN curl https://dlcdn.apache.org/hadoop/common/hadoop-3.3.6/hadoop-3.3.6.tar.gz -o hadoop-3.3.6-bin.tar.gz \
+ && tar xfz hadoop-3.3.6-bin.tar.gz --directory /home/hadoop --strip-components 1 \
+ && rm -rf hadoop-3.3.6-bin.gz
 
 FROM spark-base-image as pyspark
 # Note:- FROM spark-base-image as pyspark is used to define a new build stage named "pyspark" that is based on a
