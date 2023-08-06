@@ -59,7 +59,7 @@ ENV SPARK_MASTER="spark://spark-yarn-master:7077"
 ENV SPARK_MASTER_HOST spark-yarn-master
 ENV SPARK_MASTER_PORT 7077
 ENV PYSPARK_PYTHON python3
-ENV HADOOP_CONF_DIF="$HADOOP_HOME/etc/hadoop"
+ENV HADOOP_CONF_DIR="$HADOOP_HOME/etc/hadoop"
 # Add Hadoop native library path to the dynamic link library path
 ENV LD_LIBRARY_PATH="$HADOOP_HOME/lib/native:${LD_LIBRARY_PATH}"
 
