@@ -26,10 +26,10 @@ submit:
 	docker exec el-spark-master spark-submit --master spark://spark-master:7077 --deploy-mode client ./apps/$(app)
 
 submit-yarn-test:
-	docker exec da-spark-yarn-master spark-submit --master yarn --deploy-mode cluster ./examples/src/main/python/pi.py
+	docker exec el-spark-yarn-master spark-submit --master yarn --deploy-mode cluster ./examples/src/main/python/pi.py
 
 submit-yarn-cluster:
-	docker exec da-spark-yarn-master spark-submit --master yarn --deploy-mode cluster ./apps/$(app)
+	docker exec el-spark-yarn-master spark-submit --master yarn --deploy-mode cluster ./apps/$(app)
 
 submit-da-book:
 	make submit app=data_analysis_book/$(app)
