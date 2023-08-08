@@ -4,8 +4,9 @@ This repository contains docker seup of Apache Spark for the purpose of learning
 It contains various setups like:
 
 1. Spark Single Node Setup Using Docker
-2. Spark cluster (1 Master and 3 Working Nodes)
-3. Spark cluster with Kubernetes. 
+2. Spark Standalone Cluster  (1 Master and scalable Worker Nodes)
+3. Spark Yarn Cluster (1 Master and scalable Worker Nodes)
+4. Spark cluster with Kubernetes. 
 
 To know, how to use it, refer the readme file inside each folder. 
 
