@@ -1,0 +1,93 @@
+version: '3.8'
+
+services:
+  spark-yarn-master:
+    container_name: el-spark-yarn-master
+    build:
+      # We want to use the Dockerfile prepared for Yarn
+      dockerfile: Dockerfile-yarn
+      context: .
+    image: el-spark-yarn-image
+    hostname: my.master.org
+    entrypoint: ['./entrypoint.sh', 'master']
+    volumes:
+      - ./book_data:/opt/spark/data
+      - ./spark_apps:/opt/spark/apps
+    env_file:
+      - .env.spark
+    ports:
+      - '9090:8080'
+      - '9870:9870'
+      - '7077:7077'
+      - '8088:8088'
+
+  spark-yarn-worker1:
+    image: el-spark-yarn-image
+    entrypoint: ['./entrypoint.sh', 'worker']
+    container_name: yarn-worker-1
+    hostname: my.yarnworker1.org
+    depends_on:
+      - spark-yarn-master
+    env_file:
+      - .env.spark
+    volumes:
+      - ./book_data:/opt/spark/data
+      - ./spark_apps:/opt/spark/apps
+      - ./yarn-generated/hdfs-site.1.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml
+      - ./yarn-generated/yarn-site.1.xml:/opt/hadoop/etc/hadoop/yarn-site.xml
+    ports:
+      - "8042:8042"
+      - "9861:9861"
+  
+  spark-yarn-worker2:
+    image: el-spark-yarn-image
+    entrypoint: ['./entrypoint.sh', 'worker']
+    container_name: yarn-worker-2
+    hostname: my.yarnworker2.org
+    depends_on:
+      - spark-yarn-master
+    env_file:
+      - .env.spark
+    volumes:
+      - ./book_data:/opt/spark/data
+      - ./spark_apps:/opt/spark/apps
+      - ./yarn-generated/hdfs-site.2.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml
+      - ./yarn-generated/yarn-site.2.xml:/opt/hadoop/etc/hadoop/yarn-site.xml
+    ports:
+      - "8043:8043"
+      - "9862:9862"
+  
+  spark-yarn-worker3:
+    image: el-spark-yarn-image
+    entrypoint: ['./entrypoint.sh', 'worker']
+    container_name: yarn-worker-3
+    hostname: my.yarnworker3.org
+    depends_on:
+      - spark-yarn-master
+    env_file:
+      - .env.spark
+    volumes:
+      - ./book_data:/opt/spark/data
+      - ./spark_apps:/opt/spark/apps
+      - ./yarn-generated/hdfs-site.3.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml
+      - ./yarn-generated/yarn-site.3.xml:/opt/hadoop/etc/hadoop/yarn-site.xml
+    ports:
+      - "8044:8044"
+      - "9863:9863"
+
+  yarn-history-server:
+    container_name: el-spark-yarn-history
+    hostname: my.history.org
+    image: el-spark-yarn-image
+    entrypoint: ['./entrypoint.sh', 'history']
+    depends_on:
+      - spark-yarn-master
+    env_file:
+      - .env.spark
+    ports:
+      - '18080:18080'
+
+
+networks:
+  default:
+    name: hadoop-network

@@ -50,6 +50,8 @@ Drawbacks of Standalone cluster mode:
 1. Standalone mode does not support cluster mode for Python applications.
 2. Standalone mode only supports FIFO Scheduler.
 3. Follow the Book `Data Analysis with Python and PySpark`
+   - https://github.com/jonesberg/DataAnalysisWithPythonAndPySpark-Data
+   - https://github.com/jonesberg/DataAnalysisWithPythonAndPySpark
 
 
 
