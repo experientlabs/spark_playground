@@ -2,12 +2,12 @@ version: '3.8'
 
 services:
   spark-yarn-master:
-    container_name: el-spark-yarn-master
+    container_name: da-spark-yarn-master
     build:
       # We want to use the Dockerfile prepared for Yarn
       dockerfile: Dockerfile-yarn
       context: .
-    image: el-spark-yarn-image
+    image: da-spark-yarn-image
     hostname: my.master.org
     entrypoint: ['./entrypoint.sh', 'master']
     volumes:
@@ -22,7 +22,7 @@ services:
       - '8088:8088'
 
   spark-yarn-worker1:
-    image: el-spark-yarn-image
+    image: da-spark-yarn-image
     entrypoint: ['./entrypoint.sh', 'worker']
     container_name: yarn-worker-1
     hostname: my.yarnworker1.org
@@ -38,9 +38,9 @@ services:
     ports:
       - "8042:8042"
       - "9861:9861"
-  
+
   spark-yarn-worker2:
-    image: el-spark-yarn-image
+    image: da-spark-yarn-image
     entrypoint: ['./entrypoint.sh', 'worker']
     container_name: yarn-worker-2
     hostname: my.yarnworker2.org
@@ -56,9 +56,9 @@ services:
     ports:
       - "8043:8043"
       - "9862:9862"
-  
+
   spark-yarn-worker3:
-    image: el-spark-yarn-image
+    image: da-spark-yarn-image
     entrypoint: ['./entrypoint.sh', 'worker']
     container_name: yarn-worker-3
     hostname: my.yarnworker3.org
@@ -76,9 +76,9 @@ services:
       - "9863:9863"
 
   yarn-history-server:
-    container_name: el-spark-yarn-history
+    container_name: da-spark-yarn-history
     hostname: my.history.org
-    image: el-spark-yarn-image
+    image: da-spark-yarn-image
     entrypoint: ['./entrypoint.sh', 'history']
     depends_on:
       - spark-yarn-master
@@ -86,7 +86,6 @@ services:
       - .env.spark
     ports:
       - '18080:18080'
-
 
 networks:
   default:

@@ -58,8 +58,11 @@ rm-results:
 
 
 # Yarn cluster auto-generated docker-compose
+# run-ag:
+#	make down-ag && sh ./generate-docker-compose.sh $(n) && docker compose -f docker-compose.generated.yml up
+
 run-ag:
-	make down-ag && sh ./generate-docker-compose.sh $(n) && docker compose -f docker-compose.generated.yml up
+	make down-ag && docker compose -f docker-compose.generated.yml up
 
 down-ag:
 	docker compose -f docker-compose.generated.yml down
