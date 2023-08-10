@@ -1,4 +1,4 @@
-
+# Spark YARN Cluster in Docker
 
 This setup is to expose docker hostname to the host machine so that hostname becomes accessible.
 
