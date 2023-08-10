@@ -7,7 +7,7 @@ This setup is to expose docker hostname to the host machine so that hostname bec
 - `make run-ag n=3`
 - `make dns-modify o=true n=3`
 
-If we visit my.master.org:8088/cluster/nodes or localhost:8088/cluster/nodes we’ll get the following web interface:
+If we visit [my.master.org:8088/cluster/nodes](my.master.org:8088/cluster/nodes) or [localhost:8088/cluster/nodes](localhost:8088/cluster/nodes) we’ll get the following web interface:
 
 ![img.png](resources/img.png)
 
