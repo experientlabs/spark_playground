@@ -33,5 +33,7 @@ Which in the background executes the command:
 `sh ./dns_scripts/restore_hosts_from_backup.sh`
 
 
+Issues
+The issue with this solution is that all of the hostnames point to localhost. This means that if you were, e.g. yarn.worker1.org:8042 and changed only the port number so you end up with this: yarn.worker1.org:18080 you will see the spark history server, despite being on the yarn worker hostname. However, I don’t honestly know how to solve this since everything is actually pointing to localhost.
 
 https://medium.com/@MarinAgli1/using-hostnames-to-access-hadoop-resources-running-on-docker-5860cd7aeec1
