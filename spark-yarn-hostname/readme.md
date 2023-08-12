@@ -41,3 +41,6 @@ https://medium.com/@MarinAgli1/using-hostnames-to-access-hadoop-resources-runnin
 
 TODO:
 To add Airflow container
+Explore container orchestration tools
+    1. Kubernetes
+    2. Docker Swarm
