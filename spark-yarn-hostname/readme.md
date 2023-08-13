@@ -1,5 +1,5 @@
 # Spark YARN Cluster in Docker
-This project is based on Spark Yarn cluster plus ability to browser datanode through hostname url. 
+This project is based on [Spark Yarn cluster](https://github.com/experientlabs/spark_playground/tree/main/spark-multinode-yarn) plus ability to browser datanode through hostname url. 
 In general when we setup Spark yarn cluster, the url in web interface don't work. 
 Because host names are randomly assigned by docker and DNS resolver does not know about it. 
 So in this setup we expose docker hostname to the host machine so that hostname becomes accessible.
