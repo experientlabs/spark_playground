@@ -1,9 +1,12 @@
 # Spark YARN Cluster in Docker
-
-This setup is to expose docker hostname to the host machine so that hostname becomes accessible.
+This project is based on Spark Yarn cluster plus ability to browser datanode through hostname url. 
+In general when we setup Spark yarn cluster, the url in web interface don't work. 
+Because host names are randomly assigned by docker and DNS resolver does not know about it. 
+So in this setup we expose docker hostname to the host machine so that hostname becomes accessible.
 
 
 # Running Cluster
+Run `make run-ag n=3` and wait untill cluster starts, then run the script to modify the dns `make dns-modify o=true n=3`
 - `make run-ag n=3`
 - `make dns-modify o=true n=3`
 
@@ -41,3 +44,6 @@ https://medium.com/@MarinAgli1/using-hostnames-to-access-hadoop-resources-runnin
 
 TODO:
 To add Airflow container
+Explore container orchestration tools
+    1. Kubernetes
+    2. Docker Swarm
