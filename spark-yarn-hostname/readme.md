@@ -7,10 +7,11 @@ So in this setup we expose docker hostname to the host machine so that hostname 
 
 # Running Cluster
 Run `make run-ag n=3` and wait untill cluster starts, then run the script to modify the dns `make dns-modify o=true n=3`
-- `make run-ag n=3`
-- `make dns-modify o=true n=3`
+1. `make run-ag n=3`
+2. `make dns-modify o=true n=3`
 
-If we visit [my.master.org:8088/cluster/nodes](my.master.org:8088/cluster/nodes) or [localhost:8088/cluster/nodes](localhost:8088/cluster/nodes) we’ll get the following web interface:
+After running `make run-ag n=3` you can visit this url [my.master.org:8088/cluster/nodes](my.master.org:8088/cluster/nodes) 
+or [localhost:8088/cluster/nodes](localhost:8088/cluster/nodes) you’ll get the following web interface:
 
 ![img.png](resources/img.png)
 
