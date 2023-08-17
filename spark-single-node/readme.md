@@ -19,7 +19,7 @@ dockerfolder="/home/sam/app"
 docker run --rm -it \
   -p 4040:4040 -p 4041:4041 \
   -v ${hostfolder}:${dockerfolder} \
---entrypoint bash spark-with-jupyter:latest
+--entrypoint spark-with-jupyter:latest
 ```
 
 
