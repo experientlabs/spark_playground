@@ -3,6 +3,30 @@
 This is apache spark one node setup to test Apache spark and for learning purpose. This is an alternative to VM's that 
 are big in volume and take too much resources. 
 
+
+
+### Start Container using `docker build` command (without using docker-compose):
+ Build the image using docker build command as below
+```bash
+docker build -t spark-with-jupyter .
+```
+
+To run detached from current terminal window:
+```bash
+hostfolder="$(pwd)"   # Windows path is f'd up so print it and confirm before proceeding
+hostfolder="/C:/Users/Sanjeet/Desktop/git_pod_experient_labs/spark_playground/spark-single-node/app"
+dockerfolder="/home/sam/app"
+docker run --rm -it \
+  -p 4040:4040 -p 4041:4041 \
+  -v ${hostfolder}:${dockerfolder} \
+--entrypoint bash spark-with-jupyter:latest
+```
+
+
+
+
+### Need to test below steps for jupyter_notebook branch
+
 To build the docker image run below command
 ```
     docker-compose build
@@ -63,29 +87,6 @@ Examples:
 
 
 
-### Start Container using `docker build` command (without using docker-compose):
- Build the image using docker build command as below
-```bash
-docker build -t my-docker-image .
-```
-
-
-### Then run the image using `docker run` command:
-```bash
-hostfolder="$(pwd)"
-dockerfolder="/home/sam/app"
-docker run --rm -it \
-  --net="host" \
-  -v ${hostfolder}/app:${dockerfolder} \
---entrypoint bash spark-in-docker:latest
-```
-
-To run detached from current terminal window:
-```bash
-docker run -d --rm -it \
-    -p 4040:4040 -v ${hostfolder}/app:${dockerfolder} \ 
-    docker-spark-single-node:latest
-```
 
 
 ```
