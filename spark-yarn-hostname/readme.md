@@ -13,6 +13,8 @@ Run `make run-ag n=3` and wait untill cluster starts, then run the script to mod
 After running `make run-ag n=3` you can visit this url [my.master.org:8088/cluster/nodes](my.master.org:8088/cluster/nodes) 
 or [localhost:8088/cluster/nodes](localhost:8088/cluster/nodes) you’ll get the following web interface:
 
+Alternatively you can also use localhost to visit all nodes like [localhost:8088/cluster/nodes](localhost:8088/cluster/nodes)
+
 ![img.png](resources/img.png)
 
 
@@ -37,8 +39,8 @@ Which in the background executes the command:
 
 
 Issues
-The issue with this solution is that all of the hostnames point to localhost. This means that if you were, e.g. yarn.worker1.org:8042 and changed only the port number so you end up with this: yarn.worker1.org:18080 you will see the spark history server, despite being on the yarn worker hostname. However, I don’t honestly know how to solve this since everything is actually pointing to localhost.
-
+1. The issue with this solution is that all of the hostnames point to localhost. This means that if you were, e.g. yarn.worker1.org:8042 and changed only the port number so you end up with this: yarn.worker1.org:18080 you will see the spark history server, despite being on the yarn worker hostname. However, I don’t honestly know how to solve this since everything is actually pointing to localhost.
+2. Another bug is that generate-docker-compose.sh generates docker-compose with some alignment issue that I need to fix as time permits.
 References and Credits:
 https://medium.com/@MarinAgli1/using-hostnames-to-access-hadoop-resources-running-on-docker-5860cd7aeec1
 https://github.com/dvddarias/docker-hoster
