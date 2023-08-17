@@ -133,5 +133,5 @@ USER $UNAME
 
 RUN mkdir -p /home/$UNAME/app
 WORKDIR /home/$UNAME/app
-# CMD ["sh", "-c", "tail -f /dev/null"]
+
 CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=4041", "--no-browser", "--allow-root", "--NotebookApp.token=''" ,"--NotebookApp.password=''" ]
