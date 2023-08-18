@@ -20,3 +20,4 @@ To know, how to use it, refer the readme file inside each folder.
 - Add Airflow to the spark cluster.
 - Add Jupyter notebook to Spark Cluster.
 - Add CI tests using github actions. 
+- Spark images can also be built using Alpine linux, rather than debian images which are bit heavy. 
