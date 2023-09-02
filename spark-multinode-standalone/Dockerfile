@@ -1,4 +1,4 @@
-FROM python:3.10-buster as spark-base-image
+FROM python:3.10.9-buster as spark-base-image
 
 LABEL maintainer="experient labs"
 
