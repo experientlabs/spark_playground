@@ -1,6 +1,9 @@
 version: '3'
 services:
-  single-node:
+  spark-node:
+    image: spark_1node-image
+    container_name: spark-node
+    hostname: spark-driver
     build:
       context: .
       dockerfile: Dockerfile
