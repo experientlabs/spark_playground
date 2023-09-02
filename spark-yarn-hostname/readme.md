@@ -51,3 +51,15 @@ To add Airflow container
 Explore container orchestration tools
     1. Kubernetes
     2. Docker Swarm
+
+
+Future Roadmap: 
+Keep all features in same branch as much as possible to ease the maintenance efforts.  
+
+
+```
+sed -i -e 's/\r$//' dns_scipt/add_docker_hosts.sh
+```
+
+
+

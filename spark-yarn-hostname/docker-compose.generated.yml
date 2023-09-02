@@ -5,7 +5,7 @@ services:
     container_name: da-spark-yarn-master
     build:
       # We want to use the Dockerfile prepared for Yarn
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-yarn
       context: .
     image: da-spark-yarn-image
     hostname: my.master.org
