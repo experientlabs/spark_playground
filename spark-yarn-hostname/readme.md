@@ -61,5 +61,19 @@ Keep all features in same branch as much as possible to ease the maintenance eff
 sed -i -e 's/\r$//' dns_scipt/add_docker_hosts.sh
 ```
 
+Bugfix:
+updated `spark-yarn-hostname/generate-docker-compose.sh` to fixt the new line character. 
 
+```bash
+text="first \nsecond \nthird"
+echo $text
+first \nsecond \nthird
+```
+```bash
+text="first \nsecond \nthird"
+echo -e $text
+first 
+second
+third
+```
 
