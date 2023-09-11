@@ -9,4 +9,3 @@ spark-multinode-standalone/book_data/
 /backup/
 /docker-compose.generated.yml
 /yarn-generated/
-/book_data/backblaze_data/
