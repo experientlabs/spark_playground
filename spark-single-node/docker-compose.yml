@@ -1,13 +1,14 @@
 version: '3'
 services:
   spark-node:
-    image: spark_1node-image
-    container_name: spark-node
+    image: spark1n-image
+    container_name: spark1n
     hostname: spark-driver
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - 4040:4040
+      - 4041:4041
     volumes:
       - ./app:/home/sam/app
