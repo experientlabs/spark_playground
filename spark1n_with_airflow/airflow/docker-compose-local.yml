@@ -1,0 +1,73 @@
+version: '3.7'
+services:
+
+  postgres:
+    image: postgres:10-alpine
+    networks:
+      - common
+    environment:
+      - POSTGRES_USER=airflow
+      - POSTGRES_PASSWORD=airflow
+      - POSTGRES_DB=airflow
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    volumes:
+      - "${PWD}/db-data:/var/lib/postgresql/data"
+    ports:
+      - "5432:5432"
+
+  codexecutor:
+    image: codexecutor:latest
+    networks:
+      - common
+    volumes:
+      - "${BASE_DIR}/my-common-python:/var/lib/my-python/my-common-python"
+      - "${BASE_DIR}/my-data-warehouse:/var/lib/my-python/my-data-warehouse"
+    ports:
+      - "2222:22"
+
+  local-runner:
+    image: amazon/mwaa-loca:2_5
+    restart: always
+    networks:
+      - common
+    depends_on:
+      - postgres
+    environment:
+      - LOAD_EX=n
+      - EXECUTOR=Local
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+      - BASE_DIR=${BASE_DIR}
+      - AIRFLOW_VAR_SSH_CONNECTION_ID=ssh_codexecutor_local
+      - AIRFLOW_VAR_DATA_MONITORING_METRIC_PUBLISHER_FUNCTION_NAME=test-data-monitoring-database_to_metric_publisher
+      - AIRFLOW_VAR_S3_ABC_REPORT_URI=s3://test-sandbox.my.com/test/theabc_supply_vendor_reporting
+      - AIRFLOW_VAR_AMI_S3_LOOKER_EXPORT_PATH=s3://test-sandbox.my.com/test/looker
+      - AIRFLOW_VAR_AMI_S3_FINAL_DESTINATION_PATH=s3://test-sandbox.my.com/test/landing
+      - AIRFLOW_VAR_AMI_S3_ABC_GROSS_SPEND=s3://test-sandbox.my.com/test/abc_gross_spend
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    volumes:
+      - ${BASE_DIR}/my-airflow/dags:/usr/local/airflow/dags
+      - ${BASE_DIR}/my-airflow/requirements.txt:/usr/local/airflow/dags/requirements.txt
+      - ${BASE_DIR}/my-airflow-common/common:/usr/local/airflow/plugins/common
+      - ${BASE_DIR}/my-airflow-common/util:/usr/local/airflow/plugins/util
+      - ${BASE_DIR}/my-airflow-common:/usr/local/my-airflow-common
+      - ${BASE_DIR}/my-data-warehouse:/usr/local/my-data-warehouse
+      - ${BASE_DIR}/my-airflow:/usr/local/my-airflow
+    ports:
+      - "8080:8080"
+    command: local-runner
+    healthcheck:
+      test: ["CMD-SHELL", "[-f /usr/local/airflow/airflow-webserver.pid]"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    env_file:
+      - ./config/.env.localrunner
+
+networks:
+  common:
