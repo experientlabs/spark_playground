@@ -21,7 +21,7 @@ RUN apt-get -y install tree
 ############################################
 ENV PIPENV_VENV_IN_PROJECT=1
 
-# ENV PIPENV_VENV_IN_PROJECT=1 is important: it causes the resuling virtual environment to be created as /app/.venv. Without this the environment gets created somewhere surprising, such as /root/.local/share/virtualenvs/app-4PlAip0Q - which makes it much harder to write automation scripts later on.
+# ENV PIPENV_VENV_IN_PROJECT=1 is important: it causes the resulting virtual environment to be created as /app/.venv. Without this the environment gets created somewhere surprising, such as /root/.local/share/virtualenvs/app-4PlAip0Q - which makes it much harder to write automation scripts later on.
 
 RUN python -m pip install --upgrade pip
 
