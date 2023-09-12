@@ -96,6 +96,26 @@ docker  exec -it 1af493da8cebe92d917abc5efa34086013ebeb9e350cb5bf280c63dabc73330
 jupyter notebook --ip 0.0.0.0 --port 4041 --no-browser --allow-root
 ```
 
+
+## Launch with Jupyter Notebook
+
+### Start Container using `docker build` command (without using docker-compose):
+ Build the image using docker build command as below
+```bash
+docker build -t spark-with-jupyter .
+```
+
+To run detached from current terminal window:
+```bash
+hostfolder="$(pwd)"   # Windows path is f'd up so print it and confirm before proceeding
+hostfolder="/C:/Users/Sanjeet/Desktop/git_pod_experient_labs/spark_playground/spark-single-node/app"
+dockerfolder="/home/sam/app"
+docker run --rm -it \
+  -p 4040:4040 -p 4041:4041 \
+  -v ${hostfolder}:${dockerfolder} \
+--entrypoint bash spark-with-jupyter:latest
+```
+
 Note For Windows-1:
 Note that in case of windows, path starts with C:/ which is different than universal path pattern. 
 So if you are running from windows then make sure to check the path with volume mapping. 
@@ -105,5 +125,3 @@ Note that the host networking driver only works on Linux hosts, and is not suppo
 Docker Desktop for Windows, or Docker EE for Windows Server.
 Note also that Docker for Windows/Mac won't warn you that it doesn't work - it just runs the container silently 
 and DOESN'T bind to any local ports.
-
-

@@ -1,0 +1,27 @@
+version: '3.7'
+services:
+  webserver:
+    image: amazon/mwaa-local:2_5
+    environment:
+      - LOAD_EX=n
+      - EXECUTOR=Local
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    volumes:
+      - "${PWD}/../dcs-airflow-common:/usr/local/dcs-airflow-common"
+      - "${PWD}/../dcs-data-warehouse:/usr/local/dcs-data-warehouse"
+      - "${PWD}/../dcs-airflow:/usr/local/dcs-airflow"
+      - "${PWD}/dags:/usr/local/airflow/dags"
+      - "${PWD}/plugins:/usr/local/airflow/plugins"
+      - "${PWD}/requirements:/usr/local/airflow/requirements"
+
+    ports:
+      - "8080:8080"
+    command: webserver
+    healthcheck:
+      test: ["CMD-SHELL", "[-f /usr/local/airflow/airflow-webserver.pid]"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
