@@ -93,7 +93,7 @@ RUN cat /etc/passwd
 # create group
 RUN groupadd -g $GID $UNAME
 
-# create a user with userid 1000 and gid 100
+# create a user with userid 1000 and gid 1000
 RUN useradd -u $UID -g $GID -m -s /bin/bash $UNAME
 # -m creates home directory
 
