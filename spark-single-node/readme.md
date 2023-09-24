@@ -15,9 +15,20 @@ To run the docker run the `docker-compose up` command as given below.
 
 
 To run detached from current terminal window using `docker` command / without using `docker-compose` command
+```bash
+hostfolder="$(pwd)"   # Windows path is f'd up so print it and confirm before proceeding
+hostfolder="/C:/Users/Sanjeet/Desktop/git_pod_experient_labs/spark_playground/spark-single-node/app"
+dockerfolder="/home/sam/app"
+docker run --rm -it \
+  -p 4040:4040 -p 4041:4041 \
+  -v ${hostfolder}:${dockerfolder} \
+spark-with-jupyter:latest
+```
+
+Use below url to access jupyter_notebook [http://localhost:4041](http://localhost:4041)
 
 
-In order to launch pyspark you can go to the container and type pyspark as given below
+In order to launch pyspark you can go to the container and type spark-shell as given below
 
 ![pyspark_terminal](resources/terminal.png)
 
