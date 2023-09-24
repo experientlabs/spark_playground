@@ -84,7 +84,7 @@ In order to launch SparkUI you can go to https://localhost:4040
 Spark UI screenshot given below
 
 
-![spark_ui](resources/spark_ui.png)
+![img.png](resources/img.png)
 
 
 ### For Spark-shell users: 
