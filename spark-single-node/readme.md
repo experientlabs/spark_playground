@@ -13,6 +13,10 @@ To run the docker run the `docker-compose up` command as given below.
     docker-compose up -d
 ```
 
+
+To run detached from current terminal window using `docker` command / without using `docker-compose` command
+
+
 In order to launch pyspark you can go to the container and type pyspark as given below
 
 ![pyspark_terminal](resources/terminal.png)
