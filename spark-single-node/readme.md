@@ -3,11 +3,12 @@
 This is apache spark one node setup to test Apache spark and for learning purpose. This is an alternative to VM's that 
 are big in volume and take too much resources. 
 
+docker-compose down && docker-compose build --no-cache && docker-compose up
 
 
 ### Start Container using `docker build` command (without using docker-compose):
  Build the image using docker build command as below
-```bash
+```bash 
 docker build -t spark-with-jupyter .
 ```
 
@@ -75,6 +76,8 @@ In order to launch SparkUI you can go to localhost:4040
 Spark UI screenshot given below
 
 
+![img.png](img.png)
+
 ### Start Container using start.sh:
 To use the script, make sure it has executable permissions (chmod +x start.sh). Then you can run the script with the desired command-line argument.
 
@@ -115,3 +118,10 @@ Note that the host networking driver only works on Linux hosts, and is not suppo
 Docker Desktop for Windows, or Docker EE for Windows Server.
 Note also that Docker for Windows/Mac won't warn you that it doesn't work - it just runs the container silently 
 and DOESN'T bind to any local ports.
+
+Note-3: 
+After migrating from windows, the spark-shell launch was failing with error `java.io.FileNotFoundException: /home/sam/app/spark_events/local-1695546124823.inprogress (Permission denied)`
+The error was because of access to the spark_events folder that was used as a volume to the spark image.
+Solution was to change the access using `chmod` command. `chmod 777 app/spark_events/`.
+
+
