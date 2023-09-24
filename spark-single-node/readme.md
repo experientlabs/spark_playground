@@ -28,12 +28,67 @@ spark-with-jupyter:latest
 Use below url to access jupyter_notebook [http://localhost:4041](http://localhost:4041)
 
 
-In order to launch pyspark you can go to the container and type spark-shell as given below
+In order to launch `pyspark` you need to modify dockerfile to uncomment line `#CMD ["sh", "-c", "tail -f /dev/null"]` and comment last line
+Then you can go to the container and type pyspark as given below
 
 ![pyspark_terminal](resources/terminal.png)
 
+As an alternative to above step you can launch spark-shell (spark scala shell) without any modification by simply going 
+to the container and typing `spark-shell`. The screen shot is given below:
 
-Test if spark is setup properly and working file by running below code
+![img.png](resources/spark-shell.png)
+
+
+### Jupyter Notebook:
+Go to this url [http://localhost:4041](http://localhost:4041). 
+It will launch the Jupyter environment as given below. localhost:4041
+
+![img.png](resources/jupyter_notebook.png)
+
+Create new notebook or open existing one first_notebook.ipynb:
+
+![img.png](resources/jupyter_new_file.png)
+
+
+
+— Now run some basic python code to make sure that python and Jupyter notebook is setup properly.
+— Then run following code to find spark and create spark session.
+
+```python
+import findspark
+findspark.init()
+import pyspark
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as f
+
+# create spark session
+spark = SparkSession.builder.appName("SparkSample").getOrCreate()
+
+# read text file
+df_text_file = spark.read.text("textfile.txt")
+df_text_file.show()
+
+df_total_words = df_text_file.withColumn('wordCount', f.size(f.split(f.col('value'), ' ')))
+df_total_words.show()
+
+# Word count example
+df_word_count = df_text_file.withColumn('word', f.explode(f.split(f.col('value'), ' '))).groupBy('word').count().sort('count', ascending=False)
+df_word_count.show()
+```
+
+Screenshot of jupyter notebook running spark code:
+
+![img.png](resources/jupyter_code.png)
+
+In order to launch SparkUI you can go to https://localhost:4040
+Spark UI screenshot given below
+
+
+![spark_ui](resources/spark_ui.png)
+
+
+### For Spark-shell users: 
+Test if spark is setup properly and working as expected by running below code or any other code of your choice. 
 
 ```
 import pyspark.sql.functions as f
@@ -52,7 +107,7 @@ wc_df.show()
 ![word_frequency_count](resources/word_frequency_count.png)
 
 
-In order to launch SparkUI you can go to localhost:4040
+In order to launch SparkUI you can go to https://localhost:4040
 Spark UI screenshot given below
 
 ![spark_ui](resources/spark_ui.png)
@@ -78,12 +133,6 @@ Examples:
 
 
 
-### Start Container using `docker build` command (without using docker-compose):
- Build the image using docker build command as below
-```bash
-docker build -t my-docker-image .
-```
-
 
 ### Then run the image using `docker run` command:
 ```bash
@@ -103,33 +152,20 @@ docker run -d --rm -it \
 ```
 
 
+Other way to enter the container and launch jupyter notebook:
+
 ```
 docker  exec -it 1af493da8cebe92d917abc5efa34086013ebeb9e350cb5bf280c63dabc73330f /bin/sh
 ```
 
 ```
-jupyter notebook --ip 0.0.0.0 --port 4041 --no-browser --allow-root
+jupyter notebook --ip 0.0.0.0 --port 4041 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password=''
 ```
 
+### Known Issues:
+The jupyter notebook command used in the Dockerfile is not using any token or password.
+So it is not safe for production, However you can easily modify the command to set some password. 
 
-## Launch with Jupyter Notebook
-
-### Start Container using `docker build` command (without using docker-compose):
- Build the image using docker build command as below
-```bash
-docker build -t spark-with-jupyter .
-```
-
-To run detached from current terminal window:
-```bash
-hostfolder="$(pwd)"   # Windows path is f'd up so print it and confirm before proceeding
-hostfolder="/C:/Users/Sanjeet/Desktop/git_pod_experient_labs/spark_playground/spark-single-node/app"
-dockerfolder="/home/sam/app"
-docker run --rm -it \
-  -p 4040:4040 -p 4041:4041 \
-  -v ${hostfolder}:${dockerfolder} \
---entrypoint bash spark-with-jupyter:latest
-```
 
 Note For Windows-1:
 Note that in case of windows, path starts with C:/ which is different than universal path pattern. 
@@ -140,3 +176,9 @@ Note that the host networking driver only works on Linux hosts, and is not suppo
 Docker Desktop for Windows, or Docker EE for Windows Server.
 Note also that Docker for Windows/Mac won't warn you that it doesn't work - it just runs the container silently 
 and DOESN'T bind to any local ports.
+
+Note-3: 
+After migrating from windows, the spark-shell launch was failing with error `java.io.FileNotFoundException: /home/sam/app/spark_events/local-1695546124823.inprogress (Permission denied)`
+The error was because of access to the spark_events folder that was used as a volume to the spark image.
+Solution was to change the access using `chmod` command. `chmod 777 app/spark_events/`.
+
