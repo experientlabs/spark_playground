@@ -21,7 +21,7 @@ RUN apt-get -y install tree
 ############################################
 ENV PIPENV_VENV_IN_PROJECT=1
 
-# ENV PIPENV_VENV_IN_PROJECT=1 is important: it causes the resuling virtual environment to be created as /app/.venv. Without this the environment gets created somewhere surprising, such as /root/.local/share/virtualenvs/app-4PlAip0Q - which makes it much harder to write automation scripts later on.
+# ENV PIPENV_VENV_IN_PROJECT=1 is important: it causes the resulting virtual environment to be created as /app/.venv. Without this the environment gets created somewhere surprising, such as /root/.local/share/virtualenvs/app-4PlAip0Q - which makes it much harder to write automation scripts later on.
 
 RUN python -m pip install --upgrade pip
 
@@ -55,6 +55,7 @@ RUN apt-get update --yes && \
 # What is --jre-headless?
 # Minimal Java runtime - needed for executing non GUI Java programs
 
+
 RUN java --version
 
 # DOWNLOAD SPARK AND INSTALL
@@ -85,7 +86,7 @@ RUN cp -p "${SPARK_HOME}/conf/spark-defaults.conf.template" "${SPARK_HOME}/conf/
 
 ARG UNAME=sam
 ARG UID=1000
-ARG GID=100
+ARG GID=1000
 
 
 RUN cat /etc/passwd
@@ -93,7 +94,7 @@ RUN cat /etc/passwd
 # create group
 RUN groupadd -g $GID $UNAME
 
-# create a user with userid 1000 and gid 100
+# create a user with userid 1000 and gid 1000
 RUN useradd -u $UID -g $GID -m -s /bin/bash $UNAME
 # -m creates home directory
 
@@ -134,5 +135,6 @@ USER $UNAME
 RUN mkdir -p /home/$UNAME/app
 WORKDIR /home/$UNAME/app
 
-CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=4041", "--no-browser", "--allow-root", "--NotebookApp.token=''" ,"--NotebookApp.password=''" ]
 
+#CMD ["sh", "-c", "tail -f /dev/null"]
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=4041", "--no-browser", "--allow-root", "--NotebookApp.token=''" ,"--NotebookApp.password=''" ]
