@@ -182,3 +182,5 @@ After migrating from windows, the spark-shell launch was failing with error `jav
 The error was because of access to the spark_events folder that was used as a volume to the spark image.
 Solution was to change the access using `chmod` command. `chmod 777 app/spark_events/`.
 
+
+Note-4: New notebook was unable to save in the mounted directory. Sol: updated access for mounted directory and sub directories to 777. 
