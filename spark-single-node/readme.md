@@ -22,7 +22,7 @@ dockerfolder="/home/sam/app"
 docker run --rm -it \
   -p 4040:4040 -p 4041:4041 \
   -v ${hostfolder}:${dockerfolder} \
-spark-with-jupyter:latest
+spark1n:latest
 ```
 
 Use below url to access jupyter_notebook [http://localhost:4041](http://localhost:4041)

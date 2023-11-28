@@ -1,5 +1,7 @@
 .idea/
 spark-single-node/app/spark_events/
+spark-single-node/app/spark_etl/
+spark-single-node/app/spark_etl-0.0.1.zip
 spark-single-node/app/.ipynb_checkpoints/
 .DS_Store
 
