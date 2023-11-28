@@ -10,5 +10,18 @@ services:
     ports:
       - 4040:4040
       - 4041:4041
+      - 18080:18080
     volumes:
       - ./app:/home/sam/app
+
+#  spark-history-server:
+#    image: spark1n-image
+#    container_name: spark-history-server
+#    hostname: spark-history-server
+#    command: bash -c "cd /home/sam && $SPARK_HOME/sbin/start-history-server.sh"
+#    volumes:
+#      - ./app:/home/sam/app
+#    depends_on:
+#      - spark-node
+#    ports:
+#      - 18080:18080

@@ -22,7 +22,7 @@ dockerfolder="/home/sam/app"
 docker run --rm -it \
   -p 4040:4040 -p 4041:4041 \
   -v ${hostfolder}:${dockerfolder} \
-spark-with-jupyter:latest
+spark1n:latest
 ```
 
 Use below url to access jupyter_notebook [http://localhost:4041](http://localhost:4041)
@@ -182,3 +182,5 @@ After migrating from windows, the spark-shell launch was failing with error `jav
 The error was because of access to the spark_events folder that was used as a volume to the spark image.
 Solution was to change the access using `chmod` command. `chmod 777 app/spark_events/`.
 
+
+Note-4: New notebook was unable to save in the mounted directory. Sol: updated access for mounted directory and sub directories to 777. 
