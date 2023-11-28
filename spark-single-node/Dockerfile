@@ -137,4 +137,6 @@ WORKDIR /home/$UNAME/app
 
 
 #CMD ["sh", "-c", "tail -f /dev/null"]
-CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=4041", "--no-browser", "--allow-root", "--NotebookApp.token=''" ,"--NotebookApp.password=''" ]
+#CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=4041", "--no-browser", "--allow-root", "--NotebookApp.token=''" ,"--NotebookApp.password=''" ]
+# Start Spark History Server in the background
+CMD ["sh", "-c", "$SPARK_HOME/sbin/start-history-server.sh && jupyter notebook --ip=0.0.0.0 --port=4041 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password=''"]
