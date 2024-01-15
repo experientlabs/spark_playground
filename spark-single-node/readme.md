@@ -8,7 +8,7 @@ To build the docker image run below command
     docker-compose build
 ```
 
-To run the docker run the `docker-compose up` command as given below. 
+To run docker container run the `docker-compose up` command as given below. 
 ```
     docker-compose up -d
 ```
@@ -16,7 +16,7 @@ To run the docker run the `docker-compose up` command as given below.
 
 To run detached from current terminal window using `docker` command / without using `docker-compose` command
 ```bash
-hostfolder="$(pwd)"   # Windows path is f'd up so print it and confirm before proceeding
+hostfolder="$(pwd)/app"  # Windows path is f'd up so print it and confirm before proceeding
 hostfolder="/C:/Users/Sanjeet/Desktop/git_pod_experient_labs/spark_playground/spark-single-node/app"
 dockerfolder="/home/sam/app"
 docker run --rm -it \
@@ -36,18 +36,18 @@ Then you can go to the container and type pyspark as given below
 As an alternative to above step you can launch spark-shell (spark scala shell) without any modification by simply going 
 to the container and typing `spark-shell`. The screen shot is given below:
 
-![img.png](resources/spark-shell.png)
+![spark-shell.png](resources/spark-shell.png)
 
 
 ### Jupyter Notebook:
 Go to this url [http://localhost:4041](http://localhost:4041). 
 It will launch the Jupyter environment as given below. localhost:4041
 
-![img.png](resources/jupyter_notebook.png)
+![jupyter_notebook.png](resources/jupyter_notebook.png)
 
 Create new notebook or open existing one first_notebook.ipynb:
 
-![img.png](resources/jupyter_new_file.png)
+![jupyter_new_file.png](resources/jupyter_new_file.png)
 
 
 
